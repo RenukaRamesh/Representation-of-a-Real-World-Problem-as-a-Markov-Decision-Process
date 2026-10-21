@@ -112,12 +112,13 @@ R(s,a,s')
 $$
 
 ```
-Situation	                            Reward
-Stock maintained at a suitable level	  +50
-Ordering cost reduced	                  +15
-Desired stock level reached	            +25
-Excess inventory	                    -20
-Stock shortage                       	  -40
+Situation	                                Reward
+
+Stock maintained at a suitable level            +50
+Ordering cost reduced                           +15
+Desired stock level reached	                    +25
+Excess inventory	                            -20
+Stock shortage                       	        -40
 ```
 ---
 ## Discount Factor
@@ -252,6 +253,7 @@ for key, value in transition_probabilities.items():
 ```
 ---
 ## Output
+<img width="1790" height="620" alt="image" src="https://github.com/user-attachments/assets/371f54c6-2bc7-474a-b116-9062a8b57cf8" />
 
 
 
