@@ -47,7 +47,7 @@ S = {
 ---
 
 ## Sample State
-
+A sample state is one specific example from the state space.
 ```
 Low_Stock
 ```
@@ -69,7 +69,7 @@ A = {
 ---
 
 ## Sample Action
-
+A sample action is one action selected from the action space.
 ```
 Small_Order
 ```
@@ -113,11 +113,11 @@ $$
 
 ```
 Situation	                            Reward
-Stock maintained at a suitable level	+50
-Ordering cost reduced	                +15
+Stock maintained at a suitable level	  +50
+Ordering cost reduced	                  +15
 Desired stock level reached	            +25
 Excess inventory	                    -20
-Stock shortage                       	-40
+Stock shortage                       	  -40
 ```
 ---
 ## Discount Factor
@@ -249,7 +249,7 @@ for key, value in mdp.items():
 # Check transition probabilities
 for key, value in transition_probabilities.items():
     print(key, "=", sum(value.values()))
-
+```
 ---
 ## Output
 
