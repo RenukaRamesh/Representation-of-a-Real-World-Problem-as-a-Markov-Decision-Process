@@ -116,8 +116,8 @@ Situation	                                Reward
 
 Stock maintained at a suitable level            +50
 Ordering cost reduced                           +15
-Desired stock level reached	                    +25
-Excess inventory	                            -20
+Desired stock level reached	                  +25
+Excess inventory	                          -20
 Stock shortage                       	        -40
 ```
 ---
