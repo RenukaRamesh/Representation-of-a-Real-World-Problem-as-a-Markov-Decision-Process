@@ -138,122 +138,70 @@ Stock shortage                       	        -40
 ### Register Number : 212223240136
 
 ```
-# States
+
+from pprint import pprint
+
+# State mapping
 states = {
-    "S1": "Low_Stock",
-    "S2": "Medium_Stock",
-    "S3": "High_Stock",
-    "S4": "Out_Of_Stock"
+    0: "Low_Stock",
+    1: "Medium_Stock",
+    2: "High_Stock",
+    3: "Out_Of_Stock"
 }
 
-# Actions
+# Action mapping
 actions = {
-    "A1": "No_Order",
-    "A2": "Small_Order",
-    "A3": "Large_Order",
-    "A4": "Emergency_Order"
+    0: "No_Order",
+    1: "Small_Order",
+    2: "Large_Order",
+    3: "Emergency_Order"
 }
 
-# Transition Probabilities P(s' | s, a)
-transition_probabilities = {
-    ("Low_Stock", "No_Order"): {
-        "Low_Stock": 0.3,
-        "Out_Of_Stock": 0.7
+# MDP Transition Representation
+P = {
+    0: {
+        0: [(0.3, 0, 0, False), (0.7, 3, 0, False)],
+        1: [(0.8, 1, 25, False), (0.2, 0, 0, False)],
+        2: [(0.4, 1, 0, False), (0.6, 2, 0, False)],
+        3: [(0.8, 2, 0, False), (0.2, 1, 0, False)]
     },
-    ("Low_Stock", "Small_Order"): {
-        "Medium_Stock": 0.8,
-        "Low_Stock": 0.2
+
+    1: {
+        0: [(0.6, 0, -40, False), (0.4, 1, 0, False)],
+        1: [(0.4, 1, 0, False), (0.6, 2, 25, False)],
+        2: [(0.2, 1, 0, False), (0.8, 2, 0, False)],
+        3: [(0.1, 1, 0, False), (0.9, 2, 0, False)]
     },
-    ("Low_Stock", "Large_Order"): {
-        "Medium_Stock": 0.4,
-        "High_Stock": 0.6
+
+    2: {
+        0: [(0.7, 1, 0, False), (0.3, 2, 15, False)],
+        1: [(0.3, 1, 0, False), (0.7, 2, 0, False)],
+        2: [(0.1, 1, 0, False), (0.9, 2, -20, False)],
+        3: [(0.05, 1, 0, False), (0.95, 2, 0, False)]
     },
-    ("Low_Stock", "Emergency_Order"): {
-        "High_Stock": 0.8,
-        "Medium_Stock": 0.2
-    },
-    ("Medium_Stock", "No_Order"): {
-        "Low_Stock": 0.6,
-        "Medium_Stock": 0.4
-    },
-    ("Medium_Stock", "Small_Order"): {
-        "Medium_Stock": 0.4,
-        "High_Stock": 0.6
-    },
-    ("Medium_Stock", "Large_Order"): {
-        "Medium_Stock": 0.2,
-        "High_Stock": 0.8
-    },
-    ("Medium_Stock", "Emergency_Order"): {
-        "Medium_Stock": 0.1,
-        "High_Stock": 0.9
-    },
-    ("High_Stock", "No_Order"): {
-        "Medium_Stock": 0.7,
-        "High_Stock": 0.3
-    },
-    ("High_Stock", "Small_Order"): {
-        "Medium_Stock": 0.3,
-        "High_Stock": 0.7
-    },
-    ("High_Stock", "Large_Order"): {
-        "Medium_Stock": 0.1,
-        "High_Stock": 0.9
-    },
-    ("High_Stock", "Emergency_Order"): {
-        "Medium_Stock": 0.05,
-        "High_Stock": 0.95
-    },
-    ("Out_Of_Stock", "No_Order"): {
-        "Out_Of_Stock": 1.0
-    },
-    ("Out_Of_Stock", "Small_Order"): {
-        "Low_Stock": 0.8,
-        "Out_Of_Stock": 0.2
-    },
-    ("Out_Of_Stock", "Large_Order"): {
-        "Medium_Stock": 0.7,
-        "Low_Stock": 0.3
-    },
-    ("Out_Of_Stock", "Emergency_Order"): {
-        "Medium_Stock": 0.4,
-        "High_Stock": 0.6
+
+    3: {
+        0: [(1.0, 3, 0, False)],
+        1: [(0.8, 0, 0, False), (0.2, 3, 0, False)],
+        2: [(0.7, 1, 0, False), (0.3, 0, 0, False)],
+        3: [(0.4, 1, 0, False), (0.6, 2, 50, False)]
     }
 }
 
-# Reward Function R(s, a, s')
-rewards = {
-    ("Low_Stock", "Small_Order", "Medium_Stock"): 25,
-    ("Medium_Stock", "No_Order", "Low_Stock"): -40,
-    ("Medium_Stock", "Small_Order", "High_Stock"): 25,
-    ("High_Stock", "No_Order", "High_Stock"): 15,
-    ("High_Stock", "Large_Order", "High_Stock"): -20,
-    ("Out_Of_Stock", "Emergency_Order", "High_Stock"): 50
-}
+print("MDP Representation")
+print("\nStates:")
+print(states)
 
-# Discount Factor
-mdp = {
-    "States": states,
-    "Actions": actions,
-    "Transition_Probabilities": transition_probabilities,
-    "Rewards": rewards,
-    "Discount_Factor": 0.90
-}
+print("\nActions:")
+print(actions)
 
-print("\nMDP Representation\n")
+print("\nTransition Probability P:")
+pprint(P, sort_dicts=False, width=80)
 
-for key, value in mdp.items():
-    print(f"{key}:")
-    print(value)
-    print()
-
-# Check transition probabilities
-for key, value in transition_probabilities.items():
-    print(key, "=", sum(value.values()))
 ```
 ---
 ## Output
-<img width="1790" height="620" alt="image" src="https://github.com/user-attachments/assets/371f54c6-2bc7-474a-b116-9062a8b57cf8" />
+<img width="677" height="461" alt="image" src="https://github.com/user-attachments/assets/1a51f996-a8ea-44e5-8719-7e445b265922" />
 
 
 
